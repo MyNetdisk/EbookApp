@@ -1,5 +1,5 @@
 import { NavigationKeys } from "./NavigationKeys";
-import BookShelf from "../pages/BookShelf";
+import BookShelf from "../pages/Shelf";
 
 // 定义路由名称及其参数类型
 export type RootStackParamList = {
