@@ -1,13 +1,29 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-import Header from '../../components/Header/index';
-
-const BookShelf = (): JSX.Element => {
+const BookShelf = ({ navigation, route }: any): JSX.Element => {
+    useEffect(() => {
+        // 执行一些操作
+        navigation.setOptions({
+            headerTitle: '书架',
+            headerRight: () => (
+                <TouchableOpacity onPress={() => { }}>
+                    <Text>
+                        <Icon name="plus" size={30} color="#900" />
+                    </Text>
+                </TouchableOpacity>
+            ),
+            headerTitleAlign: 'center',
+        })
+    }, [])
     return (
         <View style={styles.container}>
-            <Header title='书架' />
             <Text>BookShelf</Text>
+            <Text>
+                <Icon name="rocket" size={30} color="#900" />;
+            </Text>
+
         </View>
     )
 }
@@ -16,8 +32,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
     },
 })
 

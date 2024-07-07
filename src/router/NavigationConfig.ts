@@ -13,7 +13,8 @@ export type RootStackParamList = {
  */
 export const routes: {
     name: string,
+    title: string,
     component: ({ navigation, route }: any) => JSX.Element,
 }[] = [
-        { name: NavigationKeys.BookShelf, component: BookShelf },
+        { name: NavigationKeys.BookShelf, component: BookShelf, title: '书架' },
     ]

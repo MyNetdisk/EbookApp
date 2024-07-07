@@ -28,7 +28,14 @@ function App(): React.JSX.Element {
     <NavigationContainer>
       <Stack.Navigator>
         {routes.map((route) => (
-          <Stack.Screen key={route.name} name={route.name} component={route.component} />
+          <Stack.Screen
+            key={route.name}
+            name={route.name}
+            component={route.component}
+            options={{
+              headerTitle:' route.title',
+            }}
+          />
         ))}
       </Stack.Navigator>
     </NavigationContainer>
