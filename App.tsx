@@ -24,7 +24,7 @@ import { routes } from './src/router/NavigationConfig';
 const Stack = createNativeStackNavigator();
 
 function App(): React.JSX.Element {
-  return (
+    return (
     <NavigationContainer>
       <Stack.Navigator>
         {routes.map((route) => (
@@ -33,7 +33,7 @@ function App(): React.JSX.Element {
             name={route.name}
             component={route.component}
             options={{
-              headerTitle:' route.title',
+              headerTitle: ' route.title',
             }}
           />
         ))}
