@@ -424,3 +424,93 @@ npx react-native run-ios      # iOS
 ### 总结
 
 通过以上步骤，你可以实现一个基本的 React Native 电子书应用，支持从本地存储导入 EPUB 文件、解析和显示电子书内容、章节导航等功能。如果需要更多高级功能（如书签、阅读设置等），可以在此基础上进行扩展和优化。
+
+在 React Native 中解析 EPUB、MOBI 和 PDF 格式的电子书文件涉及使用不同的库和方法，因为每种格式的处理方式各不相同。以下是解析每种文件格式的建议：
+
+### 1. 解析 EPUB 文件
+
+EPUB 是一种广泛使用的电子书格式。可以使用一些专门的库来解析和显示 EPUB 文件。例如：
+
+- **react-native-epub-viewer**: 这是一个流行的库，可以用来解析和显示 EPUB 文件。
+
+安装：
+
+```bash
+npm install react-native-epub-viewer
+```
+
+使用：
+
+```javascript
+import React from 'react';
+import {Epub} from 'react-native-epub-viewer';
+
+const EpubReader = () => (
+  <Epub
+    src={'path-to-your-epub-file'}
+    onNavigationChange={progress => console.log(progress)}
+    onLocationChange={location => console.log(location)}
+  />
+);
+
+export default EpubReader;
+```
+
+### 2. 解析 MOBI 文件
+
+MOBI 文件格式较少见，处理起来也比较复杂。可以尝试以下方法：
+
+- **Epub.js + mobi-js**: 将 MOBI 文件转换为 EPUB 格式，然后使用 EPUB 解析库进行处理。
+
+步骤如下：
+
+1. 将 MOBI 文件转换为 EPUB 格式。可以使用如 Calibre 等工具，或使用服务器端工具来实现转换。
+2. 使用 react-native-epub-viewer 来解析转换后的 EPUB 文件。
+
+### 3. 解析 PDF 文件
+
+PDF 是非常常见的文档格式，React Native 有多个库可以用于解析和显示 PDF 文件：
+
+- **react-native-pdf**: 一个非常流行的库，可以用于解析和显示 PDF 文件。
+
+安装：
+
+```bash
+npm install react-native-pdf
+```
+
+使用：
+
+```javascript
+import React from 'react';
+import {View, Dimensions} from 'react-native';
+import Pdf from 'react-native-pdf';
+
+const PdfReader = () => {
+  const source = {uri: 'path-to-your-pdf-file', cache: true};
+
+  return (
+    <View style={{flex: 1}}>
+      <Pdf
+        source={source}
+        onLoadComplete={(numberOfPages, filePath) => {
+          console.log(`Number of pages: ${numberOfPages}`);
+        }}
+        onPageChanged={(page, numberOfPages) => {
+          console.log(`Current page: ${page}`);
+        }}
+        onError={error => {
+          console.log(error);
+        }}
+        style={{flex: 1, width: Dimensions.get('window').width}}
+      />
+    </View>
+  );
+};
+
+export default PdfReader;
+```
+
+### 综上所述
+
+通过上述库和方法，你可以在 React Native 中解析和显示 EPUB、MOBI 和 PDF 格式的电子书文件。如果需要处理 MOBI 文件，建议先转换为 EPUB 格式，然后使用 EPUB 解析库进行处理。这样可以简化开发过程，并提高代码的复用性。
